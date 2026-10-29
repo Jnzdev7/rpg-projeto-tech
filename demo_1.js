@@ -69,11 +69,10 @@ while (jogando) {
       local = "vila";
     } else if (escolha === "2") {
       vida = vida + 3;
-      // CORREÇÃO: vida não passa de 10
+    //Vida
       if (vida > 10) {
         vida = 10;
       }
-
 
 
       console.log("A água é gelada. Vida: " + vida);
@@ -101,7 +100,7 @@ while (jogando) {
     if (escolha === "1" && inventario.includes("corda")) {
       local = "farol";
     } else if (escolha === "1" && !inventario.includes("corda")) {
-      // CORREÇÃO: não deixa atravessar sem corda
+     
       console.log("Você tenta pular, mas está longe demais.");
     } else if (escolha === "2") {
       local = "floresta";
