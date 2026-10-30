@@ -33,7 +33,7 @@ while (jogando) {
     if (inventario.includes("moeda furada") === false && inventario.includes("corda") === false) {
       inventario.push("moeda furada");
     }
-    console.log("1 - ir para a floresta   2 - ir para o poço");
+    console.log("1 - ir para a floresta    2 - ir para o poço");
     let escolha = prompt("> ");
     if (escolha === "1") {
       local = "floresta";
@@ -53,7 +53,7 @@ while (jogando) {
     } else {
       console.log("Era só o vento.");
     }
-    console.log("1 - seguir para a ponte   2 - voltar para a vila");
+    console.log("1 - seguir para a ponte    2 - voltar para a vila");
     let escolha = prompt("> ");
     if (escolha === "1") {
       local = "ponte";
@@ -63,7 +63,7 @@ while (jogando) {
   } else if (local === "poco") {
     console.log("");
     console.log("[POÇO] Um poço antigo. Não dá para ver o fundo.");
-    console.log("1 - voltar para a vila   2 - beber água (recupera 3 de vida)");
+    console.log("1 - voltar para a vila    2 - beber água (recupera 3 de vida)");
     if (inventario.includes("moeda furada")) {
       console.log("3 - jogar a moeda furada no poço");
     }
@@ -73,12 +73,12 @@ while (jogando) {
     } else if (escolha === "2" && vida < 10) {
       vida = vida + 3;
       if (vida > 10) {
-        vida = 10
+        vida = 10;
       }
       console.log("A água é gelada. Vida: " + vida);
     } else if (escolha === "3" && inventario.includes("moeda furada")) {
       console.log("A moeda cai sem fazer barulho. Uma corda sobe do fundo do poço, sozinha.");
-      inventario.shift()
+      inventario.shift();
       inventario.push("corda");
       console.log("Inventário: " + inventario);
     }
@@ -86,9 +86,9 @@ while (jogando) {
     console.log("");
     console.log("[PONTE] A ponte para o farol caiu. Do outro lado, o farol apagado.");
     if (inventario.includes("corda")) {
-      console.log("1 - amarrar a corda e atravessar   2 - voltar para a floresta");
+      console.log("1 - amarrar a corda e atravessar    2 - voltar para a floresta");
     } else {
-      console.log("Não tem como atravessar.   2 - voltar para a floresta");
+      console.log("Não tem como atravessar.    2 - voltar para a floresta");
     }
     let escolha = prompt("> ");
     if (escolha === "1" && inventario.includes("corda")) {
