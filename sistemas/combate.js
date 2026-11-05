@@ -1,55 +1,58 @@
-// Sistema de combate por turnos.
-// Uso: const venceu = combate(heroi, criarInimigo("aranha"));
-// Retorna true se o herói venceu, false se o herói caiu ou fugiu.
-const prompt = require("prompt-sync")();
-const sorte = require("./sorte");
+const prompt = require("prompt-sync")({ sigint: true });
 
-const DANO_HEROI = 2;           // dano que o herói causa quando acerta
 const CHANCE_ACERTO_HEROI = 0.7;
 
 function combate(heroi, inimigo) {
-  console.log("");
-  console.log("[COMBATE] " + inimigo.nome + " aparece! (vida " + inimigo.vida + ")");
+  let resultado = ""; // Fica vazio até o combate acabar
 
-  while (heroi.vida > 0 && inimigo.vida > 0) {
+  console.log("");
+  console.log("[COMBATE] " + inimigo.nome + " aparece!");
+
+  while (resultado === "") {
     console.log("");
     console.log(heroi.nome + ": " + heroi.vida + " de vida | " + inimigo.nome + ": " + inimigo.vida + " de vida");
-    console.log("1 - atacar   2 - fugir");
+    console.log("1 - Atacar\n2 - Fugir");
+    
     const escolha = prompt("> ");
 
     if (escolha === "1") {
-      // turno do herói
-      if (sorte(CHANCE_ACERTO_HEROI)) {
-        inimigo.vida = inimigo.vida - DANO_HEROI;
-        console.log("Você acerta! " + inimigo.nome + " perde " + DANO_HEROI + " de vida.");
+      // Turno do Herói (Chance fixa de acerto)
+      if (Math.random() < CHANCE_ACERTO_HEROI) {
+        const danoHeroi = heroi.dano || 2; // Dano padrão ou do herói
+        inimigo.vida -= danoHeroi;
+        console.log("Você acerta! " + inimigo.nome + " perde " + danoHeroi + " de vida.");
       } else {
         console.log("Você erra o golpe.");
       }
 
-      // turno do inimigo (só se ainda estiver de pé)
+      // Turno do Inimigo (se ainda estiver vivo)
       if (inimigo.vida > 0) {
-        if (sorte(inimigo.chanceAcerto)) {
-          heroi.vida = heroi.vida - inimigo.ataque;
-          console.log(inimigo.nome + " te acerta! Você perde " + inimigo.ataque + " de vida.");
-        } else {
-          console.log(inimigo.nome + " erra o ataque.");
-        }
+        const danoInimigo = inimigo.ataque || 2;
+        heroi.vida -= danoInimigo;
+        console.log(inimigo.nome + " ataca! Você perde " + danoInimigo + " de vida.");
       }
     } else if (escolha === "2") {
-      console.log("Você foge do combate.");
-      return false;
+      console.log("Você foge do combate e volta para a Vila.");
+      resultado = "fuga";
     } else {
       console.log("Valor inválido.");
     }
+
+    // Condições de término
+    if (heroi.vida <= 0) {
+      resultado = "derrota";
+    } else if (inimigo.vida <= 0) {
+      resultado = "vitoria";
+    }
   }
 
-  if (heroi.vida <= 0) {
-    console.log("Você foi derrotado por " + inimigo.nome + ".");
-    return false;
+  if (resultado === "derrota") {
+    console.log("Você foi derrotado por " + inimigo.nome + ". Game Over!");
+  } else if (resultado === "vitoria") {
+    console.log("Você derrotou " + inimigo.nome + "!");
   }
 
-  console.log("Você derrotou " + inimigo.nome + "!");
-  return true;
+  return resultado;
 }
 
 module.exports = combate;
