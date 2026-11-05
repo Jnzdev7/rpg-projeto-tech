@@ -3,10 +3,10 @@
 function criarInimigo(tipo) {
   const modelos = {
     // Inimigo comum da Floresta
-    anao:   { nome: "Anão raivoso", vida: 8, ataque: 2, chanceAcerto: 0.3 },
+    anao:   { nome: "Anão raivoso", vida: 8, ataque: 3, chanceAcerto: 0.3 },
 
     // Bosses da Masmorra (escolha do caminho)
-    lula:       { nome: "Lula de 10 Dedos", vida: 12, ataque: 4, chanceAcerto: 0.7 },
+    lula:       { nome: "Lula", vida: 12, ataque: 4, chanceAcerto: 0.7 },
     bolsonaro:  { nome: "Bolsonaro", vida: 12, ataque: 4, chanceAcerto: 0.7 }
   };
 
@@ -20,4 +20,4 @@ function criarInimigo(tipo) {
   return { ...modelo };
 }
 
-module.exports = { criarInimigo };
+module.exports =  criarInimigo 
