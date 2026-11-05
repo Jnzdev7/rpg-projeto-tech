@@ -11,13 +11,11 @@ function criarInimigo(tipo) {
   };
 
   const modelo = modelos[tipo];
-  
   if (!modelo) {
     throw new Error("Inimigo desconhecido: " + tipo);
   }
 
   // Devolve uma cópia, para cada combate ter o seu inimigo com vida própria
-  return { ...modelo };
+  return modelo;
 }
-
-module.exports =  criarInimigo 
+module.exports =  criarInimigo;
