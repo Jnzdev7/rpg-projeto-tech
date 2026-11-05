@@ -1,24 +1,26 @@
+//Vila, Floresta, Caverna, Taverna, Masmorra
 const prompt = require("prompt-sync")();
+const inimigo = require("../sistemas/inimigos");
+const combate = require("../sistemas/combate");
 const sorte = require("../sistemas/sorte");
-const { envenenar } = require("../sistemas/veneno");
+const { envenenar } = require("../sistemas/veneno");  //tracar por "dano"(?) quando 
+//mudar o veneno.js para dano.js
+const anao = inimigo("anao")
 
 function floresta(heroi) {
     console.log("");
-    console.log("[FLORESTA] Galhos fechados. Algo se mexe no chão.");
-    if (sorte(0.4)) {
-        console.log("Uma aranha te morde! Você está envenenado por 3 passos.");
-        envenenar(heroi, 3);
+    console.log("[FLORESTA] Você parece meio perdido. Cuidado, é um lugar desconhecido. ");
+    if (sorte(0.4)) {  
+        console.log("[FLORESTA] Você se deparou com um " + anao.nome + " Ele tem uma faca. Cuidado com os pés!");
+        combate(heroi, anao); //substituir por "dano"(?)
     } else {
-        console.log("Era só o vento.");
+        console.log("[FLORESTA] Bicho sortudo! Não tinha nada de perigoso, dessa vez...  Melhor sair daqui antes que apareça alguma surpresa!");
     }
-    console.log("1 - seguir para a ponte   2 - voltar para a vila");
+    console.log("1 - voltar para vila  ");
     let escolha = prompt("> ");
     if (escolha === "1") {
-        return "ponte";
-    } else if (escolha === "2") {
         return "vila";
     }
-    return "floresta";
 }
 
-module.exports = floresta;
+module.exports = floresta

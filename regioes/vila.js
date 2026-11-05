@@ -6,12 +6,12 @@ function vila(heroi) {
     if (heroi.inventario.includes("moeda furada") === false && heroi.inventario.includes("corda") === false) {
         heroi.inventario.push("moeda furada");
     }
-    console.log("1 - ir para a floresta   2 - ir para o poço");
+    console.log("1 - ir para a floresta   2 - ir para a taverna");
     let escolha = prompt("> ");
     if (escolha === "1") {
         return "floresta";
     } else if (escolha === "2") {
-        return "poco";
+        return "taverna";
     }
     console.log("Valor inválido, sabe ler não?")
     return "vila"
