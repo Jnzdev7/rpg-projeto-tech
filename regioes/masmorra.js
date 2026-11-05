@@ -1,21 +1,23 @@
 const prompt = require("prompt-sync")();
 const { temItem } = require("../sistemas/inventario");
 
-function ponte(heroi) {
+function masmorra(heroi) {
     console.log("");
-    console.log("[PONTE] A ponte para o farol caiu. Do outro lado, o farol apagado.");
-    if (temItem(heroi, "corda")) {
-        console.log("1 - amarrar a corda e atravessar   2 - voltar para a floresta");
+    console.log("[MASMORRA] Sinto uma aura sinistra nessa masmorra, para que lado será que vou?");
+    if (temItem(heroi, "Espada Eleitor Lendáriaa")) {
+        console.log("1 - escolher lado esquerdo da masmorra  2 - escolher lado direito da masmorra  3 - voltar para a floresta");
     } else {
-        console.log("Não tem como atravessar.   2 - voltar para a floresta");
+        console.log("Não conseguirei enfrentar essa masmorra sem uma espada.   3 - voltar para a floresta");
     }
     let escolha = prompt("> ");
-    if (escolha === "1" && temItem(heroi, "corda")) {
-        return "farol";
-    } else if (escolha === "2") {
+    if (escolha === "1" && temItem(heroi, "Espada Eleitor Lendária")) {
+        return "escolher lado esquerdo da masmorra";
+    } else if (escolha === "2"){
+        return "escolher lado direito da masmorra"
+    } else if (escolha === "3") {
         return "floresta";
     }
-    return "ponte";
+    return "masmorra";
 }
 
-module.exports = ponte;
+module.exports = masmorra;
